@@ -8,7 +8,7 @@ final stravaAuthRepositoryProvider = Provider<IStravaAuthRepository>((ref) {
 });
 
 final stravaAuthViewModelProvider =
-    StateNotifierProvider<StravaAuthViewModel, AsyncValue<void>>((ref) {
+    StateNotifierProvider<StravaAuthViewModel, AsyncValue<String?>>((ref) {
   final repository = ref.read(stravaAuthRepositoryProvider);
   return StravaAuthViewModel(repository);
 });

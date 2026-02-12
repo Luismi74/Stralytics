@@ -11,6 +11,9 @@ AppConfig _$AppConfigFromJson(Map<String, dynamic> json) => AppConfig(
       stravaClientSecret: json['strava_client_secret'] as String,
       redirectUrl: json['redirect_url'] as String? ?? 'stralytics://callback',
       callbackScheme: json['callback_scheme'] as String? ?? 'stralytics',
+      supabaseUrl: json['supabase_url'] as String,
+      supabaseAnonKey: json['supabase_anon_key'] as String,
+      supabaseServiceRoleKey: json['supabase_service_role_key'] as String?,
     );
 
 Map<String, dynamic> _$AppConfigToJson(AppConfig instance) => <String, dynamic>{
@@ -18,4 +21,7 @@ Map<String, dynamic> _$AppConfigToJson(AppConfig instance) => <String, dynamic>{
       'strava_client_secret': instance.stravaClientSecret,
       'redirect_url': instance.redirectUrl,
       'callback_scheme': instance.callbackScheme,
+      'supabase_url': instance.supabaseUrl,
+      'supabase_anon_key': instance.supabaseAnonKey,
+      'supabase_service_role_key': instance.supabaseServiceRoleKey,
     };

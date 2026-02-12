@@ -26,6 +26,19 @@ doc/api/
 *.js.map
 
 .flutter-plugins
+# Generated files
+!**/ios/**/default.mode1v3
+!**/ios/**/default.mode2v3
+!**/ios/**/default.pbxuser
+!**/ios/**/default.perspectivev3
+
+# Environment variables (contains sensitive keys)
+.env
+.env.local
+.env.*.local
+
+# Configuration files
+assets/config.jsonns
 .flutter-plugins-dependencies
 
 # FVM Version Cache
@@ -35,3 +48,14 @@ doc/api/
 
 # Sensitive configuration files
 assets/config.json
+
+# Generated Dart files (build_runner, json_serializable, freezed, etc.)
+*.g.dart
+*.freezed.dart
+
+# Supabase
+supabase/.env
+supabase/.env.local
+supabase/functions/.env
+supabase/config.toml
+supabase/.temp

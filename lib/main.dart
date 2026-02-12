@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stralytics/features/strava_auth/presentation/pages/strava_auth_page.dart';
+import 'package:stralytics/core/config/services/config_service.dart';
+import 'package:stralytics/core/services/supabase_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Load configuration from assets/config.json
+  final config = await ConfigService.loadConfig();
+
+  // Initialize Supabase with loaded configuration
+  await SupabaseService.initialize(
+    url: config.supabaseUrl,
+    anonKey: config.supabaseAnonKey,
+  );
+
   runApp(
     const ProviderScope(
       child: MyApp(),

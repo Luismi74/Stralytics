@@ -1,16 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stralytics/features/strava_auth/data/repositories/i_strava_auth_repository.dart';
 
-class StravaAuthViewModel extends StateNotifier<AsyncValue<void>> {
+class StravaAuthViewModel extends StateNotifier<AsyncValue<String?>> {
   final IStravaAuthRepository _repository;
 
-  StravaAuthViewModel(this._repository) : super(const AsyncValue.data(null));
+  StravaAuthViewModel(this._repository) : super(const AsyncValue.loading()) {
+    checkAuthStatus();
+  }
 
   Future<void> login() async {
     state = const AsyncValue.loading();
     try {
       await _repository.authenticate();
-      state = const AsyncValue.data(null);
+      await checkAuthStatus();
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
@@ -26,11 +28,12 @@ class StravaAuthViewModel extends StateNotifier<AsyncValue<void>> {
     }
   }
 
-  Future<bool> checkAuthStatus() async {
+  Future<void> checkAuthStatus() async {
     try {
-      return await _repository.isAuthenticated();
-    } catch (e) {
-      return false;
+      final token = await _repository.getAccessToken();
+      state = AsyncValue.data(token);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
     }
   }
 }

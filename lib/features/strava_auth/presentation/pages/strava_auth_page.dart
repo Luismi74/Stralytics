@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stralytics/features/activity_processing/presentation/screens/processing_screen.dart';
 import 'package:stralytics/features/strava_auth/presentation/providers/strava_auth_provider.dart';
 
 class StravaAuthPage extends ConsumerWidget {
@@ -9,37 +10,50 @@ class StravaAuthPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(stravaAuthViewModelProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stralytics Login'),
-      ),
-      body: Center(
-        child: authState.when(
-          data: (_) => Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Welcome to Stralytics!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton.icon(
-                onPressed: () {
-                  ref.read(stravaAuthViewModelProvider.notifier).login();
-                },
-                icon: const Icon(Icons.directions_run),
-                label: const Text('Connect with Strava'),
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
-                ),
-              ),
-            ],
+    return authState.when(
+      data: (token) {
+        if (token != null) {
+          return ProcessingScreen(accessToken: token);
+        }
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Stralytics Login'),
           ),
-          loading: () => const CircularProgressIndicator(),
-          error: (error, stackTrace) => Column(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Welcome to Stralytics!',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    ref.read(stravaAuthViewModelProvider.notifier).login();
+                  },
+                  icon: const Icon(Icons.directions_run),
+                  label: const Text('Connect with Strava'),
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      loading: () => const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+      error: (error, stackTrace) => Scaffold(
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(

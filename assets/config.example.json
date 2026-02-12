@@ -1,6 +1,9 @@
 {
-    "strava_client_id": "YOUR_CLIENT_ID",
-    "strava_client_secret": "YOUR_CLIENT_SECRET",
+    "strava_client_id": "YOUR_STRAVA_CLIENT_ID",
+    "strava_client_secret": "YOUR_STRAVA_CLIENT_SECRET",
     "redirect_url": "stralytics://callback",
-    "callback_scheme": "stralytics"
+    "callback_scheme": "stralytics",
+    "supabase_url": "https://YOUR-PROJECT.supabase.co",
+    "supabase_anon_key": "YOUR_ANON_KEY",
+    "supabase_service_role_key": "YOUR_SERVICE_ROLE_KEY"
 }

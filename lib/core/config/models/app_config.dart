@@ -22,11 +22,29 @@ class AppConfig {
   @JsonKey(name: 'callback_scheme', defaultValue: 'stralytics')
   final String callbackScheme;
 
+  /// Supabase URL
+  @JsonKey(name: 'supabase_url')
+  final String supabaseUrl;
+
+  /// Supabase Anon Key
+  @JsonKey(name: 'supabase_anon_key')
+  final String supabaseAnonKey;
+
+  /// Supabase Service Role Key
+  /// ⚠️ WARNING: This key has full admin access to your database.
+  /// It should NEVER be used in the Flutter app client code.
+  /// Only use this for server-side scripts or deployment tools.
+  @JsonKey(name: 'supabase_service_role_key')
+  final String? supabaseServiceRoleKey;
+
   AppConfig({
     required this.stravaClientId,
     required this.stravaClientSecret,
     required this.redirectUrl,
     required this.callbackScheme,
+    required this.supabaseUrl,
+    required this.supabaseAnonKey,
+    this.supabaseServiceRoleKey,
   });
 
   /// Creates an AppConfig from JSON
