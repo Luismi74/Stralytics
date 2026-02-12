@@ -58,5 +58,11 @@
 				</array>
 			</dict>
 		</array>
+		
+		<!-- LSApplicationQueriesSchemes - Allow launching native Strava app for OAuth -->
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>strava</string>
+		</array>
 	</dict>
 </plist>
