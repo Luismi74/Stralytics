@@ -6,11 +6,16 @@ allprojects {
 }
 
 rootProject.buildDir = "../build"
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
+    
+    // Provide flutter properties to plugins that expect them
+    ext {
+        flutterCompileSdkVersion = 34
+        flutterMinSdkVersion = 23
+        flutterTargetSdkVersion = 34
+    }
 }
 
 tasks.register("clean", Delete) {

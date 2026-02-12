@@ -32,3 +32,6 @@ doc/api/
 .fvm/
 .fvmrc
 .vscode/
+
+# Sensitive configuration files
+assets/config.json

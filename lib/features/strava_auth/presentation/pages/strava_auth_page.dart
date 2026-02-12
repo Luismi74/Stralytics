@@ -50,7 +50,7 @@ class StravaAuthPage extends ConsumerWidget {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  ref.read(stravaAuthViewModelProvider).login();
+                  ref.read(stravaAuthViewModelProvider.notifier).login();
                 },
                 child: const Text('Retry'),
               ),

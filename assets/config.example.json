@@ -1,0 +1,6 @@
+{
+    "strava_client_id": "YOUR_CLIENT_ID",
+    "strava_client_secret": "YOUR_CLIENT_SECRET",
+    "redirect_url": "stralytics://callback",
+    "callback_scheme": "stralytics"
+}

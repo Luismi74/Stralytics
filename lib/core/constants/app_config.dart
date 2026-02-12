@@ -1,16 +1,6 @@
-class AppConfig {
-  final String stravaClientId;
-  final String stravaClientSecret;
+// This file now re-exports the new JSON-based configuration system
+// The AppConfig class has been moved to lib/core/config/models/app_config.dart
+// and is loaded from assets/config.json using ConfigService
 
-  AppConfig({
-    required this.stravaClientId,
-    required this.stravaClientSecret,
-  });
-}
-
-class AppCustomization {
-  static final AppConfig appConfig = AppConfig(
-    stravaClientId: 'YOUR_CLIENT_ID',
-    stravaClientSecret: 'YOUR_CLIENT_SECRET',
-  );
-}
+export 'package:stralytics/core/config/models/app_config.dart';
+export 'package:stralytics/core/config/services/config_service.dart';
